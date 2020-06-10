@@ -5,7 +5,7 @@ from profiles.models import Profile
 # Create your models here.
 
 class Post(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='posts')
     body = models.TextField()
     liked = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='liked', blank=True)
     updated = models.DateTimeField(auto_now=True)
@@ -20,8 +20,12 @@ class Post(models.Model):
     def no_of_likes(self):
         return self.liked.all().count()
 
+    def num_comments(self):
+        return self.comment_set.all().count()
+
     class Meta:
         ordering = ('-created',)
+
 
 
 class Comment(models.Model):

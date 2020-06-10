@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Post
+from .models import Post, Comment
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -16,3 +16,9 @@ class PostSerializer(serializers.ModelSerializer):
     def get_liked(self, instance):
         request = self.context.get("request")
         return instance.liked.filter(pk=1).exists()
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields =['user', 'post', 'body']
