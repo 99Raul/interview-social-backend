@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from interview.models import Post
+from posts.models import Post
 # Create your models here.
 
 LIKE_CHOICES = (
