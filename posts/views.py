@@ -1,4 +1,5 @@
 from rest_framework import generics
+from rest_framework import viewsets
 from .models import Post,Comment
 from .serializers import PostSerializer, CommentSerializer
 from rest_framework.decorators import action
@@ -8,7 +9,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 # Create your views here.
 
-class PostList(generics.ListCreateAPIView):
+class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
