@@ -42,6 +42,12 @@ class Profile(models.Model):
             total_liked += item.likes.all().count()
         return total_liked
 
+    def __str__(self):
+        return self.first_name
+    
+    def __str__(self):
+        return self.last_name
+
 
 STATUS_CHOICES = (
     ('send', 'send'),
