@@ -2,10 +2,11 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from profiles.models import Profile
+import uuid
 # Create your models here.
 
 class Post(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='posts')
+    user = models.TextField(max_length=300, default="blank")
     body = models.TextField()
     liked = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='liked', blank=True)
     updated = models.DateTimeField(auto_now=True)
@@ -32,7 +33,7 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    user = models.TextField(max_length=300, default="blank")
     post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
     body = models.TextField(max_length=300, default="blank")
     updated = models.DateTimeField(auto_now=True)
